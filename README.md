@@ -604,4 +604,3 @@ Redis和Java的键实例
 	List of stored keys:: tutorial-name
 	List of stored keys:: tutorial-list
 
-##Redis PHP连接操作

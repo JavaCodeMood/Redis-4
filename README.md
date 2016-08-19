@@ -499,3 +499,109 @@ Redis 提供有两种类型的分区。假设我们有四个 redis 实例：R0�
 
 ###散列分区
 在这种类型的分区是一个散列函数（例如，模数函数）用于将键转换为数字数据，然后存储在不同的 redis 实例。
+
+
+##Redis Java连接操作
+###安装
+* 要在Java程序中使用使用操作Redis，需要确保有Redis的Java驱动程序和Java设置在机器上。可以检查看Java教程-学习如何在机器上安装Java。现在，让我们来看看如何设置Redis的Java驱动程序。
+
+* 需要[下载jedis.jar](http://repo1.maven.org/maven2/redis/clients/jedis/2.1.0/jedis-2.1.0-sources.jar)。请一定要下载它的最新版本。
+需要包括jedis.jar到你的类路径中。
+
+###连接到Redis服务器
+	
+	import redis.clients.jedis.Jedis;
+	public class RedisJava {
+	   public static void main(String[] args) {
+	      //Connecting to Redis server on localhost
+	      Jedis jedis = new Jedis("localhost");
+	      System.out.println("Connection to server sucessfully");
+	      //check whether server is running or not
+	      System.out.println("Server is running: "+jedis.ping());
+	 }
+	}
+
+现在，让我们来编译和运行上面的程序来测试连接Redis服务器。你可以根据实际情况改变路径。这里假设jedis.jar的当前版本在当前路径中可用
+
+	$javac RedisJava.java
+	$java RedisJava
+	Connection to server sucessfully
+	Server is running: PONG
+
+Redis和Java字符串实例
+
+	import redis.clients.jedis.Jedis;
+	public class RedisStringJava {
+	   public static void main(String[] args) {
+	      //Connecting to Redis server on localhost
+	      Jedis jedis = new Jedis("localhost");
+	      System.out.println("Connection to server sucessfully");
+	      //set the data in redis string
+	      jedis.set("tutorial-name", "Redis tutorial");
+	     // Get the stored data and print it
+	     System.out.println("Stored string in redis:: "+ jedis.get("tutorial-name"));
+	 }
+	}
+
+现在，让我们编译并运行上述程序。
+
+	$javac RedisStringJava.java
+	$java RedisStringJava
+	Connection to server sucessfully
+	Stored string in redis:: Redis tutorial
+
+Redis和Java列表示例
+
+	import redis.clients.jedis.Jedis;
+	public class RedisListJava {
+	   public static void main(String[] args) {
+	      //Connecting to Redis server on localhost
+	      Jedis jedis = new Jedis("localhost");
+	      System.out.println("Connection to server sucessfully");
+	      //store data in redis list
+	      jedis.lpush("tutorial-list", "Redis");
+	      jedis.lpush("tutorial-list", "Mongodb");
+	      jedis.lpush("tutorial-list", "Mysql");
+	     // Get the stored data and print it
+	     List<String> list = jedis.lrange("tutorial-list", 0 ,5);
+	     for(int i=0; i<list.size(); i++) {
+	       System.out.println("Stored string in redis:: "+list.get(i));
+	     }
+	 }
+	}
+
+现在，让我们编译并运行上述程序。
+
+	$javac RedisListJava.java
+	$java RedisListJava
+	Connection to server sucessfully
+	Stored string in redis:: Redis
+	Stored string in redis:: Mongodb
+	Stored string in redis:: Mysql
+
+Redis和Java的键实例
+
+	import redis.clients.jedis.Jedis;
+	public class RedisKeyJava {
+	   public static void main(String[] args) {
+	      //Connecting to Redis server on localhost
+	      Jedis jedis = new Jedis("localhost");
+	      System.out.println("Connection to server sucessfully");
+	      //store data in redis list
+	     // Get the stored data and print it
+	     List<String> list = jedis.keys("*");
+	     for(int i=0; i<list.size(); i++) {
+	       System.out.println("List of stored keys:: "+list.get(i));
+	     }
+	   }
+	}
+
+现在，让我们编译并运行上述程序。
+
+	$javac RedisKeyJava.java
+	$java RedisKeyJava
+	Connection to server sucessfully
+	List of stored keys:: tutorial-name
+	List of stored keys:: tutorial-list
+
+##Redis PHP连接操作

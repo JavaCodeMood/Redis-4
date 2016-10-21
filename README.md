@@ -30,6 +30,10 @@ Redis是一个开源的，先进的 key-value 存储可用于构建高性能，�
 
 	$redis-server
 
+启动后如下：
+
+![](https://github.com/silence940109/Redis/blob/master/image/redis-server.png)
+
 ###查看 redis 是否还在运行
 
 	$redis-cli
@@ -507,6 +511,18 @@ Redis 提供有两种类型的分区。假设我们有四个 redis 实例：R0�
 
 * 需要[下载jedis.jar](http://repo1.maven.org/maven2/redis/clients/jedis/2.1.0/jedis-2.1.0-sources.jar)。请一定要下载它的最新版本。
 需要包括jedis.jar到你的类路径中。
+
+* 如果使用的是maven项目，你可以到添加
+
+
+	<dependency>
+	    <groupId>redis.clients</groupId>
+	    <artifactId>jedis</artifactId>
+	    <version>2.8.1</version>
+	</dependency>
+
+到你的pom.xml文件中
+
 
 ###连接到Redis服务器
 	
